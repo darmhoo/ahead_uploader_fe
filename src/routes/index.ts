@@ -18,6 +18,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../pages/Login.vue')
     },
     {
+        path: '/upload-requests',
+        name: 'UploadRequests',
+        component: () => import('../pages/UploadRequests.vue')
+    },
+    {
         path: '/dashboard',
         name: 'Dashboard',
         component: () => import('../pages/Dashboard.vue')
@@ -33,7 +38,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/login', '/', '/dashboard']
+    const publicPages = ['/login', '/', '/dashboard', '/upload-requests']
     const authRequired = !publicPages.includes(to.path)
     const auth = useAuthStore()
     if (authRequired && !auth.user) {

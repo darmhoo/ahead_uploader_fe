@@ -2,7 +2,7 @@
     <div class="flex">
         <!-- Sidebar -->
         <Sidebar />
-        <div>
+        <div class="flex-1 flex flex-col min-h-screen bg-background text-foreground p-4 rounded-lg shadow-lg">
             <Header />
             <slot></slot>
 
