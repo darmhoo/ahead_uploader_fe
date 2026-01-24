@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.vue';
 import { getAccountTransactions } from '../lib/api';
 import TableComponent from '../components/TableComponent.vue';
 import { toast } from 'vue3-toastify';
+import type { FieldConfig } from '@/types';
 
 
 const data = ref<Array<any>>([]);
@@ -25,7 +26,7 @@ const fetchData = async (page: number) => {
     }
 };
 
-const filters = ref([
+const filters = ref<FieldConfig[]>([
     {
         type: 'text', // FieldConfig expects 'text' for search
         label: 'A',

@@ -15,13 +15,17 @@ export type FieldConfig =
     | {
         name: string
         label?: string
-        type: 'text' | 'file'
+        type: 'text' | 'file' | 'number' | 'dateRange'
+        value?: any
+        placeholder?: string
     }
     | {
         name: string
         label?: string
         type: 'select'
         options: SelectOption[]
+        value?: string | number
+        placeholder?: string
     }
 
 

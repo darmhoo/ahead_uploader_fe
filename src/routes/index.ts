@@ -79,7 +79,7 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, _from, next) => {
     const auth = useAuthStore()
     // Cast user to AuthUser or undefined for type safety
     const user = auth.user as unknown as AuthUser | undefined

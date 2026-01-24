@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import Layout from '../layouts/Layout.vue';
-import { getAccountTransactions, getJournalTransactions } from '../lib/api';
+import { getJournalTransactions } from '../lib/api';
 import TableComponent from '../components/TableComponent.vue';
 
 const data = ref<Array<any>>([]);
