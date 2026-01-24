@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { deleteItem, getDecryptedItem } from './localStorage'
+import { useLoaderStore } from '../store/loader.store'
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? 'localhost:8000',
+  baseURL: import.meta.env.VITE_APP_API_BASE_URL ?? 'localhost:8000',
 })
 
 const user = getDecryptedItem('user')
@@ -19,13 +20,14 @@ instance.interceptors.request.use(
     } else if (config.headers && config.headers['Authorization']) {
       delete config.headers['Authorization']
     }
+    useLoaderStore().show()
     return config
   },
   (error) => Promise.reject(error)
 )
 
 instance.interceptors.response.use(
-  (response) => response,
+  (response) => { useLoaderStore().hide(); return response },
   (error) => {
     console.error('API Error:', error.status)
     if (error.status === 401) {
@@ -33,8 +35,9 @@ instance.interceptors.response.use(
 
       console.error('Unauthorized access - redirecting to login')
       deleteItem('user')
-      window.location.replace('/auth/login')
+      // window.location.replace('/auth/login')
     }
+    useLoaderStore().hide()
     return Promise.reject(error)
   }
 )

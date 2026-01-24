@@ -6,7 +6,7 @@
             <Form @submit="onSubmit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                        Email
+                        Username
                     </label>
                     <Field name="email" type="email" id="email"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -38,6 +38,8 @@
 
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate';
 import { required, email } from '@vee-validate/rules';
+import { useAuthStore } from '../store/auth.store';
+const authStore = useAuthStore();
 
 defineRule('required', required);
 defineRule('email', email);
@@ -54,6 +56,6 @@ configure({
 
 function onSubmit(values: Record<string, any>) {
     // Handle login logic here
-    alert(`Email: ${values.email}\nPassword: ${values.password}`);
+    authStore.login({ username: values.email, password: values.password });
 }
 </script>

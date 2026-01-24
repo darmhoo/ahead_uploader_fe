@@ -1,18 +1,29 @@
 <script setup lang="ts">
+import { formatLabel } from '../lib/utils';
 import Card from './ui/card/Card.vue';
+import type { LucideIcon } from 'lucide-vue-next';
+
+const props = defineProps<{
+    data: string | number;
+    label: string;
+    icon?: LucideIcon;
+}>();
 
 </script>
 
 <template>
     <Card>
-        <div class="flex flex-col items-center w-full px-4">
-            <h2 class="text-2xl font-bold">Statistics</h2>
-            <p class="text-gray-600">Here are some important stats:</p>
-            <ul class="mt-4 space-y-2">
-                <li>Total Users: 1,234</li>
-                <li>Active Sessions: 567</li>
-                <li>Conversion Rate: 4.5%</li>
-            </ul>
+        <div class="flex flex-row items-center w-full px-4 py-3 justify-between">
+            <div>
+                <div class="text-sm text-gray-500 mb-1">
+                    {{ formatLabel(label) }}
+                </div>
+                <div class="text-xl font-bold">
+                    {{ data }}
+                </div>
+            </div>
+
+            <component v-if="icon" :is="icon" class="w-10 h-10 text-gray-400" />
         </div>
     </Card>
 </template>
